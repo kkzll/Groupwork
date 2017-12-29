@@ -60,6 +60,34 @@ step1:定义item
 / 20="怨恨"
 </item>
 
+<item welcome>
+
+</item>
+
+<item instruction_word1>
+
+</item>
+
+<item instruction_word2>
+
+</item>
+
+<item instruction_frustrationpractice>
+
+</item>
+
+<item instruction_frutrationformal>
+
+</item>
+
+<item end>
+
+</item>
+
+<item end_all>
+
+</item>
+
 <item point_item>
 / 1="+"
 </item>

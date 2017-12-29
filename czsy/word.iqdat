@@ -119,3 +119,6 @@ date	time	group	subject	build	blocknum	trialnum	blockcode	trialcode	pretrialpaus
 122917	22:32:29	1	1	4.0.10.0	1	38	mainpart_block	redword_trial	500	0	0	0	0	0	36	1	50	0	1	√	70pct	50pct	666	0	0	0	0	0
 122917	22:32:29	1	1	4.0.10.0	1	39	mainpart_block	redword_trial	500	0	0	0	0	0	36	1	43	0	1	√	70pct	50pct	562	0	0	0	0	0
 122917	22:32:29	1	1	4.0.10.0	1	40	mainpart_block	redword_trial	500	0	0	0	0	0	36	1	28	0	1	√	70pct	50pct	583	0	0	0	0	0
+122917	23:17:25	1	1	4.0.10.0	1	1	mainpart_block	greenword_trial	500	0	0	0	0	0	33	1	60	0	1	√	70pct	50pct	541	0	0	0	0	0
+122917	23:17:25	1	1	4.0.10.0	1	2	mainpart_block	greenword_trial	500	0	0	0	0	0	36	0	52	0	1	X	70pct	50pct	624	0	0	0	0	0
+122917	23:17:25	1	1	4.0.10.0	1	3	mainpart_block	greenword_trial	500	0	0	0	0	0	Ctrl+'Q'	1	0	0	1	√	70pct	50pct	-1	0	0	0	0	0
