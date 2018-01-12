@@ -14,7 +14,7 @@
 
 step1:定义item
 
-<item positiveword_item>
+<item redword_item>
 / 1="开心"
 / 2="赞叹" 
 / 3="团圆"
@@ -25,29 +25,6 @@ step1:定义item
 / 8="功勋"
 / 9="开朗"
 / 10="完满"
-/ 11="爽朗"
-/ 12="风趣" 
-/ 13="浪漫"
-/ 14="和美"
-/ 15="博爱"
-/ 16="和善"
-/ 17="真情" 
-/ 18="明智"
-/ 19="勤恳"
-/ 20="幽默"
-</item>
-
-<item negativeword_item>
-/ 1="愚昧"
-/ 2="颓废" 
-/ 3="贪婪"
-/ 4="衰亡"
-/ 5="受贿"
-/ 6="撒谎"
-/ 7="杀戮" 
-/ 8="倒闭"
-/ 9="包庇"
-/ 10="暴徒"
 / 11="垂死"
 / 12="惨败" 
 / 13="愤恨"
@@ -60,35 +37,58 @@ step1:定义item
 / 20="怨恨"
 </item>
 
-<item welcome>
+<item greenword_item>
+/ 1="愚昧"
+/ 2="颓废" 
+/ 3="贪婪"
+/ 4="衰亡"
+/ 5="受贿"
+/ 6="撒谎"
+/ 7="杀戮" 
+/ 8="倒闭"
+/ 9="包庇"
+/ 10="暴徒"
+/ 11="爽朗"
+/ 12="风趣" 
+/ 13="浪漫"
+/ 14="和美"
+/ 15="博爱"
+/ 16="和善"
+/ 17="真情" 
+/ 18="明智"
+/ 19="勤恳"
+/ 20="幽默"
+</item>
+
+<item welcome_item>
+/ 1=""
+</item>
+
+<item instruction_word1_item>
 
 </item>
 
-<item instruction_word1>
+<item instruction_word2_item>
 
 </item>
 
-<item instruction_word2>
+<item instruction_frustrationpractice_item>
 
 </item>
 
-<item instruction_frustrationpractice>
+<item instruction_frutrationformal_item>
 
 </item>
 
-<item instruction_frutrationformal>
+<item end_item>
 
 </item>
 
-<item end>
+<item end_all_item>
 
 </item>
 
-<item end_all>
-
-</item>
-
-<item point_item>
+<item point_item_item>
 / 1="+"
 </item>
 
@@ -104,8 +104,7 @@ step1:定义item
 step2:定义text，修饰item长什么样子，在屏幕中什么地方出现
 
 <text redword_text>
-/ items = positiveword_item
-/ items = negativeword_item
+/ items = redword_item
 / fontstyle = ("Agency FB", 8%, false, false, false, false, 5, 1)
 / txcolor = (0, 0, 0)
 / txcolor = (255,0,0)
@@ -114,8 +113,7 @@ step2:定义text，修饰item长什么样子，在屏幕中什么地方出现
 </text>
 
 <text greenword_text>
-/ items = positiveword_item
-/ items = negativeword_item
+/ items = greenword_item
 / fontstyle = ("Agency FB", 8%, false, false, false, false, 5, 1)
 / txcolor = (0,255,0)
 / txbgcolor = (0,0,0)
@@ -178,16 +176,96 @@ step3:定义试次，定义了刺激材料什么时间出现，被试做什么�
 
 </trial>
 
+备注：此部分需要修改为按任意键继续！
+
+<trial welcome_trial>
+/ stimulustimes = [1 = welcome_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial instruction_word1_trial>
+/ stimulustimes = [1 = instruction_word1_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial instruction_word2_trial>
+/ stimulustimes = [1 = instruction_word2_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial instruction_frustrationpractice_trial>
+/ stimulustimes = [1 = instruction_frustrationpractice_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial instruction_frutrationformal_trial>
+/ stimulustimes = [1 = instruction_frustrationformal_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial end_trial>
+/ stimulustimes = [1 = end_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial end_all_trial>
+/ stimulustimes = [1 = end_all_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
 step4:定义block，规定了使用哪些试次，试次呈现的顺序
 
-<block mainpart_block>
+<block word_block>
 / screencolor = (256,256,256)
 / trials = [1-40 = noreplace(redword_trial,greenword_trial)]
 </block>
 
+<block welcome_block>
+/ screencolor = (256,256,256)
+/ trials = [welcome_trial,instruction_word1_trial]
+</block>
+
+<block instruction_frustrationpractice_block>
+/ screencolor = (256,256,256)
+/ trials = [end_trial,instruction_frustrationpractice_trial]
+</block>
+(本环节还没有做)
+<block frustrationpractice_block>
+/ screencolor = (256,256,256)
+/ trials = [frustrationformal_trial]
+</block>
+
+<block instruction_frustrationformal_block>
+/ screencolor = (256,256,256)
+/ trials = [instruction_frustrationformal_trial]
+</block>
+(本环节还没有做)
+<block frustrationformal_block>
+/ screencolor = (256,256,256)
+/ trials = [frustrationformal_trial]
+</block>
+
+<block instruction_word2_block>
+/ screencolor = (256,256,256)
+/ trials = [end_trial,instruction_word2_trial]
+</block>
+
+<block end_block>
+/ screencolor = (256,256,256)
+/ trials = [end_all_trial]
+</block>
 
 step5:定义实验，组织呈现那些区块，以及区块呈现的顺序
 <expt mainpart_expt>
-/ blocks = [1 = mainpart_block]
+/ blocks = [1 = welcome_block, 2 = word_block, 3 = instruction_frustrationpractice_block,
+            4 = frustrationpractice_block, 5 = instruction_frustrationformal_block,
+            6 = frustrationformal_block, 7 = instruction_word2_block, 8 = end_block]
 </expt>
 
