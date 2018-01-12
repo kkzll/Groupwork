@@ -61,31 +61,51 @@ step1:定义item
 </item>
 
 <item welcome_item>
-/ 1=""
+/ 1="welcome.jpg"
 </item>
 
 <item instruction_word1_item>
-
+/ 1="word1.jpg"
 </item>
 
 <item instruction_word2_item>
-
+/ 1="word2.jpg"
 </item>
 
 <item instruction_frustrationpractice_item>
-
+/ 1="instruction_frustrationpractice.jpg"
 </item>
 
-<item instruction_frutrationformal_item>
-
+<item instruction_frustrationformal_item>
+/ 1="instruction_frustrationformal.jpg"
 </item>
 
 <item end_item>
-
+/ 1="end.jpg"
 </item>
 
 <item end_all_item>
+/ 1="endall.jpg"
+</item>
 
+<item frustrationpracticea_item>
+/ 1="practice1.jpg"
+/ 2="practice2.jpg"
+/ 3="practice3.jpg"
+</item>
+
+<item frustrationpracticeb_item>
+/ 1="practice4.jpg"
+/ 2="practice5.jpg"
+</item>
+
+<item frustrationformala_item>
+/ 1="formal1.jpg"
+/ 2="formal2.jpg"
+</item>
+
+<item frustrationformal3_item>
+/ 1="formal3.jpg"
 </item>
 
 <item point_item_item>
@@ -175,51 +195,72 @@ step3:定义试次，定义了刺激材料什么时间出现，被试做什么�
 / ontrialend = [trial.greenword_trial.clearstimulusframes()]
 
 </trial>
-
-备注：此部分需要修改为按任意键继续！
-
+备注：这个需要3秒钟跳转
 <trial welcome_trial>
 / stimulustimes = [1 = welcome_item]
 / validresponse = ("J","F")
 / correctresponse = ("F")
 </trial>
-
+备注：这个是按空格继续的（有最短时间限制）
 <trial instruction_word1_trial>
 / stimulustimes = [1 = instruction_word1_item]
 / validresponse = ("J","F")
 / correctresponse = ("F")
 </trial>
-
+备注：这个是按空格继续的（有最短时间限制）
 <trial instruction_word2_trial>
 / stimulustimes = [1 = instruction_word2_item]
 / validresponse = ("J","F")
 / correctresponse = ("F")
 </trial>
-
+备注：这个是按空格继续的（有最短时间限制）
 <trial instruction_frustrationpractice_trial>
 / stimulustimes = [1 = instruction_frustrationpractice_item]
 / validresponse = ("J","F")
 / correctresponse = ("F")
 </trial>
-
-<trial instruction_frutrationformal_trial>
+备注：这个是按空格继续的（有最短时间限制）
+<trial instruction_frustrationformal_trial>
 / stimulustimes = [1 = instruction_frustrationformal_item]
 / validresponse = ("J","F")
 / correctresponse = ("F")
 </trial>
-
+备注：需设置3秒后跳转
 <trial end_trial>
 / stimulustimes = [1 = end_item]
 / validresponse = ("J","F")
 / correctresponse = ("F")
 </trial>
-
+备注：需设置3秒后跳转
 <trial end_all_trial>
 / stimulustimes = [1 = end_all_item]
 / validresponse = ("J","F")
 / correctresponse = ("F")
 </trial>
 
+<trial frustrationpracticea>
+/ stimulustimes = [1 = frustrationpracticea_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("J")
+</trial>
+
+<trial frustrationpracticeb>
+/ stimulustimes = [1 = frustrationpracticeb_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial frustrationformala>
+/ stimulustimes = [1 = frustrationpracticeb_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial frustrationformal3>
+/ stimulustimes = [1 = frustrationpracticeb_item]
+/ validresponse = ("J","F","Q")
+/ correctresponse = ("Q")
+</trial>
 step4:定义block，规定了使用哪些试次，试次呈现的顺序
 
 <block word_block>
@@ -236,20 +277,20 @@ step4:定义block，规定了使用哪些试次，试次呈现的顺序
 / screencolor = (256,256,256)
 / trials = [end_trial,instruction_frustrationpractice_trial]
 </block>
-(本环节还没有做)
+
 <block frustrationpractice_block>
 / screencolor = (256,256,256)
-/ trials = [frustrationformal_trial]
+/ trials = [random(frustrationpracticea_trial,frustrationpracticeb_trial)]
 </block>
 
 <block instruction_frustrationformal_block>
 / screencolor = (256,256,256)
 / trials = [instruction_frustrationformal_trial]
 </block>
-(本环节还没有做)
+
 <block frustrationformal_block>
 / screencolor = (256,256,256)
-/ trials = [frustrationformal_trial]
+/ trials = [frustrationformala_trial,frustrationformal3_trial]
 </block>
 
 <block instruction_word2_block>
@@ -264,8 +305,8 @@ step4:定义block，规定了使用哪些试次，试次呈现的顺序
 
 step5:定义实验，组织呈现那些区块，以及区块呈现的顺序
 <expt mainpart_expt>
-/ blocks = [1 = welcome_block, 2 = word_block, 3 = instruction_frustrationpractice_block,
-            4 = frustrationpractice_block, 5 = instruction_frustrationformal_block,
-            6 = frustrationformal_block, 7 = instruction_word2_block, 8 = end_block]
+/ blocks = [1 = welcome_block; 2 = word_block; 3 = instruction_frustrationpractice_block;
+            4 = frustrationpractice_block; 5 = instruction_frustrationformal_block;
+            6 = frustrationformal_block; 7 = instruction_word_block; 8 = end_block]
 </expt>
 
