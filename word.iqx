@@ -1,0 +1,339 @@
+﻿
+*****************增加正误判断*******************
+
+**************************增加注视点呈现时间****************************俩都是自己编的内容，ceil用以取整
+
+<values>
+/ pointtime = 0
+</values>
+
+<expressions>
+/generationrandom = ceil(rand(400,600))
+</expressions>
+
+
+step1:定义item
+
+<item redword_item>
+/ 1="开心"
+/ 2="赞叹" 
+/ 3="团圆"
+/ 4="美满"
+/ 5="仁爱"
+/ 6="甜蜜"
+/ 7="诚心" 
+/ 8="功勋"
+/ 9="开朗"
+/ 10="完满"
+/ 11="垂死"
+/ 12="惨败" 
+/ 13="愤恨"
+/ 14="诡计"
+/ 15="患病"
+/ 16="沦陷"
+/ 17="苛刻" 
+/ 18="魔鬼"
+/ 19="囚禁"
+/ 20="怨恨"
+</item>
+
+<item greenword_item>
+/ 1="愚昧"
+/ 2="颓废" 
+/ 3="贪婪"
+/ 4="衰亡"
+/ 5="受贿"
+/ 6="撒谎"
+/ 7="杀戮" 
+/ 8="倒闭"
+/ 9="包庇"
+/ 10="暴徒"
+/ 11="爽朗"
+/ 12="风趣" 
+/ 13="浪漫"
+/ 14="和美"
+/ 15="博爱"
+/ 16="和善"
+/ 17="真情" 
+/ 18="明智"
+/ 19="勤恳"
+/ 20="幽默"
+</item>
+
+<item point_item>
+/ 1="+"
+</item>
+
+<item correct_item>
+/ 1="√"
+</item>
+
+<item wrong_item>
+/ 2="X"
+</item>
+
+备注：以下是图片刺激
+<picture welcome_item>
+/ items=("welcome.jpg")
+</picture>
+
+<picture instruction_word1_item>
+/ items=("word1.jpg")
+</picture>
+
+<picture instruction_word2_item>
+/ items=("word2.jpg")
+</picture>
+
+<picture instruction_frustrationpractice_item >
+/items = ("instruction_frustrationpractice.jpg")
+</picture>
+
+<picture  instruction_frustrationformal_item>
+/items = ("instruction_frustrationformal.jpg")
+</picture>
+
+
+<picture frustrationpracticea_item>
+/ items=("practice1.jpg","practice2.jpg")
+</picture>
+
+<picture frustrationpracticeb_item>
+/ items= ("practice4.jpg","practice5.jpg")
+</picture>
+
+<picture frustrationformala_item>
+/ items=("formal1.jpg","formal2.jpg")
+</picture>
+
+<picture frustrationformal3_item>
+/ items= ("formal3.jpg")
+</picture>
+
+<picture end_item>
+/ items=("end.jpg")
+</picture>
+
+<picture end_all_item>
+/ items= ("endall.jpg")
+</picture>
+
+
+step2:定义text，修饰item长什么样子，在屏幕中什么地方出现
+
+<text redword_text>
+/ items = redword_item
+/ fontstyle = ("Agency FB", 8%, false, false, false, false, 5, 1)
+/ txcolor = (0, 0, 0)
+/ txcolor = (255,0,0)
+/ txbgcolor = (0,0,0)
+/ position = (50%,50%)
+</text>
+
+<text greenword_text>
+/ items = greenword_item
+/ fontstyle = ("Agency FB", 8%, false, false, false, false, 5, 1)
+/ txcolor = (0,255,0)
+/ txbgcolor = (0,0,0)
+/ position = (50%,50%)
+</text>
+
+<text point_text>
+/ items = point_item
+/ fontstyle = ("Agency FB", 8%, false, false, false, false, 5, 1)
+/ txcolor = (85,85,85)
+/ txbgcolor = (0,0,0)
+/ position = (50%,50%)
+</text>
+
+<text correct_text>
+/ items = correct_item
+/ fontstyle =  ("Agency FB", 8%, false, false, false, false, 5, 1)
+/ txcolor = (0,255,0)
+/ txbgcolor = (0,0,0)
+/ position = (50%,70%)
+</text>
+
+<text wrong_text>
+/ items = wrong_item
+/ fontstyle =  ("Agency FB", 8%, false, false, false, false, 5, 1)
+/ txcolor = (255,0,0)
+/ txbgcolor = (0,0,0)
+/ position = (50%,70%)
+</text>
+
+
+step3:定义试次，定义了刺激材料什么时间出现，被试做什么反应，什么是正确反应和错误反应
+
+</trial>
+备注：总指导语，任意键进入实验。
+<trial welcome_trial>
+/ stimulustimes = [1 = welcome_item]
+/ validresponse = (anyresponse)
+/ correctresponse = (anyresponse)
+/recorddata = false
+</trial>
+
+备注：词汇判断指导语，按空格进入
+<trial instruction_word1_trial>
+/ stimulustimes = [1 = instruction_word1_item]
+/ validresponse = (" ")
+/ correctresponse = (" ")
+/ recorddata = false
+</trial>
+
+<trial redword_trial>
+/ pretrialpause = 500
+/ stimulustimes = [1 = point_text; 400 = redword_text]
+/ validresponse = ("J","F")
+/ correctresponse = ("J")
+/ correctmessage = (correct_text,200)
+/ errormessage = (wrong_text,200)
+
+/ ontrialbegin = [values.pointtime = expressions.generationrandom]
+/ ontrialbegin = [trial.redword_trial.insertstimulustime(text.point_text,0)]
+/ ontrialbegin = [trial.redword_trial.insertstimulustime(text.redword_text,values.pointtime)]
+/ ontrialend = [trial.redword_trial.clearstimulusframes()]
+
+</trial>
+
+<trial greenword_trial>
+/ pretrialpause = 500
+/ stimulustimes = [1 = point_text; 400 = greenword_text]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+/ correctmessage = (correct_text,200)
+/ errormessage = (wrong_text,200)
+
+/ ontrialbegin = [values.pointtime = expressions.generationrandom]
+/ ontrialbegin = [trial.greenword_trial.insertstimulustime(text.point_text,0)]
+/ ontrialbegin = [trial.greenword_trial.insertstimulustime(text.greenword_text,values.pointtime)]
+/ ontrialend = [trial.greenword_trial.clearstimulusframes()]
+</trial>
+
+备注：每个环节的结束语end,空格键进入下一环节。
+<trial end_trial>
+/ stimulustimes = [1 = end_item]
+/ validresponse = (" ")
+/ correctresponse = (" ")
+</trial>
+
+备注：字谜问题指导语practice，2*2，a，b，有反馈
+备注：这个是按空格继续的（有最短时间限制）
+<trial instruction_frustrationformal_trial>
+/ stimulustimes = [1 = instruction_frustrationformal_item]
+/ validresponse = (" ")
+/ correctresponse = (" ")
+/ recorddata = false
+</trial>
+
+<trial frustrationpracticea_trial>
+/ stimulustimes = [1 = frustrationpracticea_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+/ correctmessage = (correct_text,400)
+/ errormessage = (wrong_text,400)
+</trial>
+
+<trial frustrationpracticeb_trial>
+/ stimulustimes = [1 = frustrationpracticeb_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("J")
+/ correctmessage = (correct_text,400)
+/ errormessage = (wrong_text,400)
+</trial>
+
+备注：正式字谜，3个字谜问题，a，b，和最后一个无答案问题
+备注：这个是按空格继续的------------------------------------------------------
+<trial instruction_frustrationpractice_trial>
+/ stimulustimes = [1 = instruction_frustrationpractice_item]
+/ validresponse = (" ")
+/ correctresponse = (" ")
+/ recorddata = false
+</trial>
+
+<trial frustrationformala_trial>
+/ stimulustimes = [1=frustrationformala_item]
+/ validresponse = ("J","F")
+/ correctresponse = ("F")
+</trial>
+
+<trial frustrationformal3_trial>
+/ stimulustimes = [1 = frustrationformal3_item]
+/ validresponse = ("J","F","Q")
+/ correctresponse = ("Q")
+</trial>
+
+备注：这个是按空格继续的（有最短时间限制），第2次词汇判断指导语，空格键进入
+<trial instruction_word2_trial>
+/ stimulustimes = [1 = instruction_word2_item]
+/ validresponse = (" ")
+/ correctresponse = (" ")
+/ recorddata = false
+</trial>
+
+备注：最终结束实验，任意键结束实验
+<trial end_all_trial>
+/ stimulustimes = [1 = end_all_item]
+/ validresponse = (anyresponse)
+/ correctresponse = (anyresponse)
+/ recorddata = false
+</trial>
+
+
+
+step4:定义block，规定了使用哪些试次，试次呈现的顺序------------------------------------------------------------------------
+
+<block welcome_block>
+/ screencolor = (0,0,0)
+/ trials = [1=welcome_trial;2=instruction_word1_trial]
+</block>
+
+<block word_block>
+/ screencolor = (0,0,0)
+/ trials = [1-40 = noreplace(redword_trial,greenword_trial)]
+</block>
+
+<block instruction_frustrationpractice_block>
+/ screencolor = (0,0,0)
+/ trials = [1=end_trial;2=instruction_frustrationpractice_trial]
+</block>
+
+<block frustrationpractice_block>
+/ screencolor = (0,0,0)
+/ trials = [1-4=noreplace(frustrationpracticea_trial,frustrationpracticeb_trial)]
+</block>
+
+<block instruction_frustrationformal_block>
+/ screencolor = (0,0,0)
+/ trials = [1=instruction_frustrationformal_trial]
+</block>
+
+<block frustrationformala_block>
+/ screencolor = (0,0,0)
+/ trials = [1-2=noreplace(frustrationformala_trial)]
+</block>
+
+<block frustrationformal3_block>
+/ screencolor = (0,0,0)
+/ trials = [1=frustrationformal3_trial]
+</block>
+
+<block instruction_word2_block>
+/ screencolor = (0,0,0)
+/ trials = [1=end_trial;2=instruction_word2_trial]
+</block>
+
+<block end_block>
+/ screencolor = (0,0,0)
+/ trials = [1=end_trial;2=end_all_trial]
+</block>
+
+step5:定义实验，组织呈现那些区块，以及区块呈现的顺序
+<expt mainpart_expt>
+/ blocks = [1 = welcome_block; 2 = word_block; 
+			3 = instruction_frustrationpractice_block;
+			4 = frustrationpractice_block; 5 = instruction_frustrationformal_block;6 = frustrationformala_block; 7= frustrationformal3_block;
+			8 = instruction_word2_block;9 = word_block; 10 = end_block]
+</expt>
+
