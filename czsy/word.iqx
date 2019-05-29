@@ -108,7 +108,7 @@ step1:定义item
 / 1="formal3.jpg"
 </item>
 
-<item point_item_item>
+<item point_item>
 / 1="+"
 </item>
 
@@ -307,6 +307,6 @@ step5:定义实验，组织呈现那些区块，以及区块呈现的顺序
 <expt mainpart_expt>
 / blocks = [1 = welcome_block; 2 = word_block; 3 = instruction_frustrationpractice_block;
             4 = frustrationpractice_block; 5 = instruction_frustrationformal_block;
-            6 = frustrationformal_block; 7 = instruction_word_block; 8 = end_block]
+            6 = frustrationformal_block; 7 = instruction_word2_block; 8 = end_block]
 </expt>
 
